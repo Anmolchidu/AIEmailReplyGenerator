@@ -1,13 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
 import toast from 'react-hot-toast';
 import { generateReply, sendEmail, saveDraft, updateDraft, createConversation } from '../services/api';
-import { useAuth } from '../context/AuthContext';
 
 const TONES = ['professional', 'friendly', 'formal', 'casual', 'apologetic', 'confident'];
 const LENGTHS = ['short', 'medium', 'long'];
 
 export default function Composer({ darkMode, initialDraft, onDraftSaved }) {
-  const { gmailAddress, gmailAppPassword } = useAuth();
   const [currentEmail, setCurrentEmail] = useState('');
   const [tone, setTone] = useState('professional');
   const [length, setLength] = useState('medium');
@@ -117,15 +115,10 @@ export default function Composer({ darkMode, initialDraft, onDraftSaved }) {
   const handleSend = async () => {
     if (!toAddr.trim()) { toast.error('Enter recipient email.'); return; }
     if (!editorContent.trim()) { toast.error('Write a message first.'); return; }
-    if (!gmailAddress || !gmailAppPassword) {
-      toast.error('Gmail credentials not set. Go to Settings first.');
-      return;
-    }
     setSending(true);
     try {
       const { data } = await sendEmail({
         to: toAddr, subject, message: editorContent,
-        gmail_address: gmailAddress, gmail_app_password: gmailAppPassword,
         conversation_id: convId, original_email: currentEmail, tone,
       });
       toast.success(data.message || 'Email sent!');

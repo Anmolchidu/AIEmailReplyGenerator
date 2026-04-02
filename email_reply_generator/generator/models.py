@@ -1,7 +1,17 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+
+class User(AbstractUser):
+    gmail_address = models.EmailField(blank=True, default='')
+    gmail_app_password = models.CharField(max_length=255, blank=True, default='')
+
+    class Meta:
+        db_table = 'users'
 
 
 class Conversation(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='conversations')
     subject = models.CharField(max_length=255, default='No Subject')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -25,6 +35,7 @@ class Message(models.Model):
 
 
 class Draft(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='drafts')
     subject = models.CharField(max_length=255, blank=True, default='')
     email_to = models.EmailField(blank=True, default='')
     content = models.TextField(blank=True, default='')
@@ -36,12 +47,12 @@ class Draft(models.Model):
 
 
 class EmailHistory(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='email_history')
     original_email = models.TextField()
     generated_reply = models.TextField()
     tone = models.CharField(max_length=50)
     subject = models.CharField(max_length=255, blank=True, default='')
     sent_to = models.EmailField(blank=True, default='')
-    gmail_address = models.EmailField(blank=True, default='')
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

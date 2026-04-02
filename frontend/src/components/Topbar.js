@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 
 export default function Topbar({ darkMode, onToggleDark, onSearch }) {
+  const { user } = useAuth();
   const [query, setQuery] = useState('');
 
   const handleSearch = (e) => {
@@ -24,7 +26,10 @@ export default function Topbar({ darkMode, onToggleDark, onSearch }) {
       <button className="btn btn-sm btn-outline-secondary" onClick={onToggleDark} title="Toggle theme">
         {darkMode ? '☀️' : '🌙'}
       </button>
-      <span className="fs-5">✉️</span>
+      <div className="d-flex align-items-center gap-2">
+        <div className="avatar-circle">{user?.username?.[0]?.toUpperCase()}</div>
+        <span className="small fw-semibold d-none d-md-inline">{user?.username}</span>
+      </div>
     </div>
   );
 }
