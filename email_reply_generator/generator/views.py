@@ -15,6 +15,7 @@ from .models import Conversation, Message, Draft, EmailHistory
 from .services import generate_email_reply, send_gmail
 
 logger = logging.getLogger('generator')
+
 User = get_user_model()
 
 
