@@ -1,0 +1,196 @@
+/* ── Base ─────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #f6f8fc;
+  color: #1f2937;
+  margin: 0;
+}
+
+.cursor-pointer { cursor: pointer; }
+
+/* ── App Shell ────────────────────────────────────────────────────────────── */
+.app-shell {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  transition: background 0.3s, color 0.3s;
+}
+
+.main-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* ── Sidebar ──────────────────────────────────────────────────────────────── */
+.sidebar {
+  width: 220px;
+  min-width: 220px;
+  background: #fff;
+  border-right: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  transition: background 0.3s;
+}
+
+.sidebar-brand {
+  font-size: 1.1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.sidebar-nav-item {
+  background: none;
+  border: none;
+  color: #374151;
+  font-size: 0.9rem;
+  transition: background 0.15s;
+}
+
+.sidebar-nav-item:hover { background: #f3f4f6; }
+.sidebar-nav-item.active { background: #eff6ff; color: #2563eb; font-weight: 600; }
+
+.avatar-circle {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+/* ── Topbar ───────────────────────────────────────────────────────────────── */
+.topbar {
+  height: 56px;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.topbar .form-control { background: #f3f4f6; border-color: #e5e7eb; }
+.topbar .form-control:focus { background: #fff; }
+.topbar .input-group-text { background: #f3f4f6; border-color: #e5e7eb; }
+
+/* ── Composer ─────────────────────────────────────────────────────────────── */
+.composer-panel { background: #fff; }
+.composer-header { background: #fff; flex-shrink: 0; }
+.composer-body { background: #fff; }
+
+.reply-card {
+  background: #f9fafb;
+  border-color: #e5e7eb !important;
+  transition: border-color 0.15s, background 0.15s;
+}
+.reply-card:hover { background: #eff6ff; border-color: #93c5fd !important; }
+.reply-card.active { background: #eff6ff; border-color: #2563eb !important; }
+
+.reply-editor { font-family: inherit; line-height: 1.7; resize: vertical; }
+
+.ai-panel { border-top: 2px solid #e5e7eb; padding-top: 1rem; }
+.summary-panel { background: #f9fafb; }
+.suggestions-panel { background: #fffbeb; border-color: #fcd34d !important; }
+
+/* ── Inbox ────────────────────────────────────────────────────────────────── */
+.inbox-panel { background: #fff; }
+
+.thread-list {
+  width: 280px;
+  min-width: 280px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.thread-item { transition: background 0.15s; }
+.thread-item:hover { background: #f9fafb; }
+.thread-item.active { background: #eff6ff; }
+
+.thread-detail { background: #fff; overflow: hidden; }
+
+.chat-bubble { max-width: 80%; }
+.user-bubble { margin-left: auto; }
+.ai-bubble { margin-right: auto; }
+.user-bubble .bubble-content { background: #eff6ff; border: 1px solid #bfdbfe; }
+.ai-bubble .bubble-content { background: #f0fdf4; border: 1px solid #bbf7d0; }
+
+/* ── Panel views ──────────────────────────────────────────────────────────── */
+.panel-view { background: #f6f8fc; min-height: 100%; }
+
+/* ── Auth pages ───────────────────────────────────────────────────────────── */
+.auth-page { background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%); }
+.auth-card { border-radius: 16px; }
+
+/* ── Dark mode ────────────────────────────────────────────────────────────── */
+.dark-mode { background: #111827; color: #f9fafb; }
+
+.dark-mode .sidebar,
+.sidebar.dark {
+  background: #1f2937;
+  border-color: #374151;
+}
+.dark-mode .sidebar .sidebar-nav-item { color: #d1d5db; }
+.dark-mode .sidebar .sidebar-nav-item:hover { background: #374151; }
+.dark-mode .sidebar .sidebar-nav-item.active { background: #1e3a5f; color: #60a5fa; }
+.dark-mode .sidebar .sidebar-brand { border-color: #374151; }
+.dark-mode .sidebar .border-top { border-color: #374151 !important; }
+
+.dark-mode .topbar,
+.topbar.dark {
+  background: #1f2937;
+  border-color: #374151;
+}
+.dark-mode .topbar .form-control { background: #374151; border-color: #4b5563; color: #f9fafb; }
+.dark-mode .topbar .input-group-text { background: #374151; border-color: #4b5563; color: #9ca3af; }
+
+.dark-mode .composer-panel,
+.dark-mode .composer-header,
+.dark-mode .composer-body,
+.composer-panel.dark {
+  background: #1f2937;
+  color: #f9fafb;
+}
+.dark-mode .form-control,
+.dark-mode .form-select {
+  background: #374151;
+  border-color: #4b5563;
+  color: #f9fafb;
+}
+.dark-mode .form-control::placeholder { color: #9ca3af; }
+.dark-mode .reply-card { background: #374151; border-color: #4b5563 !important; color: #f9fafb; }
+.dark-mode .reply-card.active { background: #1e3a5f; border-color: #3b82f6 !important; }
+.dark-mode .summary-panel { background: #374151; border-color: #4b5563 !important; }
+.dark-mode .suggestions-panel { background: #3d3000; border-color: #92400e !important; }
+
+.dark-mode .inbox-panel,
+.inbox-panel.dark { background: #1f2937; color: #f9fafb; }
+.dark-mode .thread-item:hover { background: #374151; }
+.dark-mode .thread-item.active { background: #1e3a5f; }
+.dark-mode .thread-list { border-color: #374151; }
+.dark-mode .user-bubble .bubble-content { background: #1e3a5f; border-color: #3b82f6; }
+.dark-mode .ai-bubble .bubble-content { background: #14532d; border-color: #16a34a; }
+
+.dark-mode .panel-view { background: #111827; }
+.dark-mode .card { background: #1f2937; border-color: #374151; color: #f9fafb; }
+.dark-mode .border-bottom,
+.dark-mode .border-end { border-color: #374151 !important; }
+.dark-mode .text-muted { color: #9ca3af !important; }
+.dark-mode .bg-light { background: #374151 !important; color: #f9fafb; }
+.dark-mode hr { border-color: #374151; }
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .sidebar { width: 60px; min-width: 60px; }
+  .sidebar .sidebar-nav-item span:last-child,
+  .sidebar-brand span:last-child,
+  .sidebar .fw-semibold,
+  .sidebar .text-muted,
+  .sidebar .btn-outline-danger { display: none; }
+  .thread-list { width: 200px; min-width: 200px; }
+}
